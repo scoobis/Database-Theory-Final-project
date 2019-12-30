@@ -1,0 +1,30 @@
+body {background-image: linear-gradient(to right, rgb(143, 0, 143) , rgb(68, 0, 255)); font-family: Tahoma,Verdana,Segoe,sans-serif; }
+
+#container {position: fixed; border-radius: 10px; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; border: 1px solid black; padding: 10px}
+
+input {
+    height:17px;
+    border: 0;
+    width: calc(100% - 2px);
+    margin-left:1px;
+    box-shadow: -8px 10px 0px -7px black, 8px 10px 0px -7px black;
+    -webkit-transition: box-shadow 0.3s;
+    transition: box-shadow 0.3s;
+    background: transparent;
+    text-align: center;
+    margin-top: 40px;
+    font-size: 28px;
+  }
+  input:focus {
+    outline: none;
+    box-shadow: -8px 10px 0px -7px rgb(175, 54, 231), 8px 10px 0px -7px rgb(175, 54, 231);
+  }
+
+  button {font-size: 30px; background:aqua; margin-top: 40px; cursor: pointer; border: 2px solid aqua; border-radius: 5px; padding: 10px 15px 10px 15px; box-shadow: 3px 3px;}
+  
+  button:hover {box-shadow: 7px 7px; border-radius: 10px; transition-duration: 200ms;}
+
+  a {text-decoration: none; color: black;}
+
+  #message {color: red;}
+  

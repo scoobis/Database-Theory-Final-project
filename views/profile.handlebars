@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="eng">
+    <head>
+        <meta charset="utf-8">
+        <title>Home</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="/css/profile.css">
+    </head>
+    <body>
+
+        <h1 id="username">{{ username }}</h1>
+        <p id="values">Height: {{ height }}cm Weight: {{ weight }}kg</p>
+        <h2 id="name">{{ name }}</h2>
+
+        <div id="bikes">
+            <h1 class="bikes_header">Bikes</h1>
+            {{#each bikeList}}
+            <div class="bike">
+                <h2>Brand: {{ this.brand }}</h2>
+                <h2>Model: {{ this.model }}</h2>
+                <h3>Price: ${{ this.price }}</h3>
+            </div>
+            {{/each}}
+            <button id="{{ addBike }}">{{ addBike }}</button>
+        </div>
+    </body>
+</html>

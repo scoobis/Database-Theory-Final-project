@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="eng">
+    <head>
+        <meta charset="utf-8">
+        <title>Home</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="/css/login.css">
+    </head>
+    <body>
+
+        <form method="POST" action="/login">
+  <div id="container">
+      <h1 id="logo"><a href="/">2DV513_final</a></h1>
+    <input type="text" placeholder="Email" name="email" required>
+    <input type="password" placeholder="Password" name="password" required>
+    <span class="underline"></span>
+
+    <p id="message">{{ message }}</p>
+
+    <button type="submit">Login</button>
+  </div>
+</form>
+
+
+    </body>
+</html>

@@ -1,0 +1,9 @@
+body {background-image: linear-gradient(to right, rgb(143, 0, 143) , rgb(68, 0, 255));}
+
+#box {position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;}
+
+button {margin: 50px; border-color: black; padding: 20px; font-size: 30px; font-weight: bold; border-radius: 10px; cursor: pointer; box-shadow: 3px 3px; background-color: rgb(255, 82, 241);}
+a {text-decoration: none; color: black;}
+
+button:hover {box-shadow: 8px 8px; border-radius: 15px; transition-duration: 200ms;}
+

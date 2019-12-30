@@ -1,0 +1,12 @@
+body {background-image: linear-gradient(to right, rgb(143, 0, 143) , rgb(68, 0, 255)); font-family: Tahoma,Verdana,Segoe,sans-serif; }
+
+#username {text-align: center; margin-top: 50px}
+#name {text-align: center;}
+#values {text-align: center;}
+
+#bikes {border: 2px solid black; padding: 25px; border-radius: 15px; position: absolute;}
+.bike {border: 1px solid black; padding: 10px; border-radius: 10px; margin: 20px;}
+.bikes_header {text-align: center; margin-top: -10px}
+
+#Add_Bike {margin: 20px; border-color: black; padding: 10px; font-size: 20px; font-weight: bold; border-radius: 10px; cursor: pointer; box-shadow: 3px 3px; background-color: rgb(255, 82, 241);}
+#Add_Bike:hover {box-shadow: 8px 8px; border-radius: 15px; transition-duration: 200ms;}
