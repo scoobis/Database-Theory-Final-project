@@ -38,7 +38,7 @@ function mainPage (req, res) {
             height: user[0].height,
             weight: user[0].weight,
             bikeList: bikes,
-            addBike: 'Add_Bike'
+            allBikes: bikes
     
           })
         } else {
@@ -48,7 +48,8 @@ function mainPage (req, res) {
         name: user[0].first_name +' '+ user[0].last_name,
         height: user[0].height,
         weight: user[0].weight,
-        bikeList: bikes
+        bikeList: bikes,
+        allBikes: bikes
       })
     }
     } else {
