@@ -14,7 +14,7 @@
         <h2 id="name">{{ name }}</h2>
 
         <div id="bikes">
-            <h1 class="bikes_header">Bikes</h1>
+            <h1 class="header">Bikes</h1>
             {{#each bikeList}}
             <div class="bike">
                 <h2>Brand: {{ this.brand }}</h2>
@@ -28,13 +28,21 @@
            <form action="/addNewBike" method="POST">
                 <select name="bike">
                     {{#each bikes}}
-                    <option value="{{this.id}}">{{this.brand}} | {{this.model}}</option>
+                    <option value="{{ this.id }}">{{this.brand}} | {{this.model}}</option>
                     {{/each}}
                 </select>
                     <button type="submit">Add</button>
             </form>
             <button id="close">Close</button>
         </div>
+        </div>
+
+        <div id="runBox">
+            <h1 class="header">Run Info</h1>
+            <h2>Threshold: {{ pace }}</h2>
+            <h2>Training shoe: {{ trainingShoe }}</h2>
+            <h2>Racing shoe: {{ racingShoe }}</h2>
+            <button id="newBike">Change info</button>
         </div>
     </body>
 

@@ -27,10 +27,18 @@ function login(req, res, con) {
 }
 
 function register(req, res, con) {
+    // create user
     let password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(12))
     con.query(`INSERT INTO user (first_name, last_name, email, password, username, weight, height) `+
     `VALUES("${req.body.first_name}", "${req.body.last_name}", "${req.body.email.toLowerCase()}", "${password}", "${req.body.username}", 0, 0)`)
+
     res.redirect('/')
+
+    con.query(`SELECT COUNT(id) AS id FROM user`, (err, user) => {
+        if (err) throw err
+
+        con.query(`INSERT INTO run (user_id, pace, racing_shoe, training_shoe) VALUES(${user[0].id}, 0, "-", "-")`)
+    })
 }
 
 function addNewBike(req, res, con) {

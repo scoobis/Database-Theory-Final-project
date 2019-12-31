@@ -35,35 +35,29 @@ function mainPage (req, res) {
         con.query(`SELECT * FROM bikes`, (err2, allBikes) => {
           if (err2) throw err2
 
+          // query run stats for user
+          con.query(`SELECT pace, training_shoe, racing_shoe FROM run WHERE user_id = "${user[0].id}"`, (err3, run) => {
+            if (err3) throw err3
+
       // checking if url have a user
       if (user.length !== 0) {
-        if (user[0].username === req.session.username) {
-          // if profile is the logged in user
-
           res.render('profile', {
             username: user[0].username,
             name: user[0].first_name +' '+ user[0].last_name,
             height: user[0].height,
             weight: user[0].weight,
             bikeList: usersbikes,
-            bikes: allBikes
+            bikes: allBikes,
+            pace: run[0].pace,
+            trainingShoe: run[0].training_shoe,
+            racingShoe: run[0].racing_shoe
     
           })
-        } else {
-          // if the profile is not the logged in user
-      res.render('profile', {
-        username: user[0].username,
-        name: user[0].first_name +' '+ user[0].last_name,
-        height: user[0].height,
-        weight: user[0].weight,
-        bikeList: usersbikes,
-        bikes: allBikes
-      })
-    }
     } else {
       res.render('index')
     }
   })
+})
 })
     })
   }

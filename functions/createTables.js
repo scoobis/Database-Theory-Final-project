@@ -28,6 +28,16 @@ function createUsersBikesTable(con) {
     'bike_id int NOT NULL)')
 }
 
+function createRunTable(con) {
+    con.query('CREATE TABLE IF NOT EXISTS run'+
+    '(user_id int NOT NULL, '+
+    'pace int NOT NULL, '+
+    'racing_shoe varchar(100) NOT NULL, '+
+    'training_shoe varchar(100) NOT NULL, '+
+    'PRIMARY KEY(user_id))')
+} 
+
 exports.createUserTable = createUserTable
 exports.creataBikeTable = creataBikeTable
 exports.createUsersBikesTable = createUsersBikesTable
+exports.createRunTable = createRunTable

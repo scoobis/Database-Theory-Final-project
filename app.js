@@ -35,6 +35,7 @@ con.connect(function (err) {
     createTable.createUserTable(con)
     createTable.creataBikeTable(con)
     createTable.createUsersBikesTable(con)
+    createTable.createRunTable(con)
   }
 })
 
