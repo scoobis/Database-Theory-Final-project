@@ -1,18 +1,17 @@
 const bcrypt = require('bcrypt')
 
 function login(req, res, con) {
-    con.query('SELECT email, first_name, last_name, username, password from user WHERE email = ?', req.body.email, (err, rows) => {
+    con.query('SELECT email, first_name, last_name, username, password, id from user WHERE email = ?', req.body.email, (err, rows) => {
         if (err) throw err
         
         let corect = true
         // check or else it will crach
         console.log(rows.length)
         if (rows.length === 1) {
-            console.log('inside')
         if (bcrypt.compareSync(req.body.password, rows[0].password)) {
-            console.log('correct')
             req.session.email = rows[0].email
             req.session.username = rows[0].username
+            req.session.userID = rows[0].id
 
             corect = false
             res.redirect('/')
@@ -20,7 +19,6 @@ function login(req, res, con) {
      }
 
      if (corect) {
-         console.log('WRONG')
         res.render('login', {
             message: 'Wrong password or email!'
         })
@@ -35,5 +33,14 @@ function register(req, res, con) {
     res.redirect('/')
 }
 
+function addNewBike(req, res, con) {
+    if (req.session.userID) {
+    con.query(`INSERT INTO usersbikes (user_id, bike_id)
+    VALUES(${req.session.userID}, ${req.body.bike})`)
+    }
+    res.redirect(req.get('referer'))
+}
+
 exports.login = login
 exports.register = register
+exports.addNewBike = addNewBike

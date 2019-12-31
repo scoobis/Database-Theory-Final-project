@@ -25,10 +25,10 @@
             <button id="newBike">Add Bike</button>
 
         <div id="newBikeWindows" class="test">
-           <form action="/addBike">
-                <select name="bikes">
-                    {{#each allBikes}}
-                    <option>{{this.brand}} | {{this.model}}</option>
+           <form action="/addNewBike" method="POST">
+                <select name="bike">
+                    {{#each bikes}}
+                    <option value="{{this.id}}">{{this.brand}} | {{this.model}}</option>
                     {{/each}}
                 </select>
                     <button type="submit">Add</button>

@@ -1,3 +1,5 @@
+const queries = require('./functions/queries')
+
 
 function mainPage (req, res) {
 
@@ -17,15 +19,21 @@ function mainPage (req, res) {
   }
 
   function profile (req, res, con) {
+    // query profiles
     con.query(`SELECT id, first_name, last_name, username, height, weight FROM user WHERE username = ?`, 
     req.originalUrl.substring(9), (err, user) => {
       if (err) throw err
 
+      // query users bikes
       con.query(`SELECT brand, price, model FROM bikes AS b 
        INNER JOIN usersbikes AS ub 
        ON b.id = ub.bike_id
-       WHERE ub.user_id = ${user[0].id}`, (err1, bikes) => {
+       WHERE ub.user_id = ${user[0].id}`, (err1, usersbikes) => {
         if (err1) throw err1
+
+        // query all bikes if user want to add bikes
+        con.query(`SELECT * FROM bikes`, (err2, allBikes) => {
+          if (err2) throw err2
 
       // checking if url have a user
       if (user.length !== 0) {
@@ -37,8 +45,8 @@ function mainPage (req, res) {
             name: user[0].first_name +' '+ user[0].last_name,
             height: user[0].height,
             weight: user[0].weight,
-            bikeList: bikes,
-            allBikes: bikes
+            bikeList: usersbikes,
+            bikes: allBikes
     
           })
         } else {
@@ -48,14 +56,15 @@ function mainPage (req, res) {
         name: user[0].first_name +' '+ user[0].last_name,
         height: user[0].height,
         weight: user[0].weight,
-        bikeList: bikes,
-        allBikes: bikes
+        bikeList: usersbikes,
+        bikes: allBikes
       })
     }
     } else {
       res.render('index')
     }
   })
+})
     })
   }
 
