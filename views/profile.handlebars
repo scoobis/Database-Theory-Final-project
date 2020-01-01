@@ -9,9 +9,12 @@
     </head>
     <body>
 
+    <div id="profileContainer">
         <h1 id="username">{{ username }}</h1>
         <p id="values">Height: {{ height }}cm Weight: {{ weight }}kg</p>
+        <button id="editHW">Test</button>
         <h2 id="name">{{ name }}</h2>
+    </div>
 
         <div id="bikes">
             <h1 class="header">Bikes</h1>
@@ -56,21 +59,48 @@
                 <h2>Shoes</h2>
                 <form action="/chnageRunInfo" method="POST">
                 <label class="shoeLabel" for="trainingShoe">Training shoe:</label>
-                    <input type="text" placeholder="Training Shoe" name="trainingShoe" class="chnageRunInput" id="trainingShoe">
+                    <input type="text" placeholder="Training Shoe" name="trainingShoe" class="chnageInput" id="trainingShoe">
                     <br>
                     <label class="shoeLabel" for="racingShoe">Racing shoe:</label>
-                    <input type="text" placeholder="Racing Shoe" name="racingShoe" class="chnageRunInput" id="racingShoe">
+                    <input type="text" placeholder="Racing Shoe" name="racingShoe" class="chnageInput" id="racingShoe">
 
                     <br></br>
 
                 <h2>Threshold</h2>
-                    <input placeholder="Min" name="min" type="number" class="chnageRunInput" id="min" value="4">
-                    <input placeholder="sec" name="sec" type="number" class="chnageRunInput" id="sec" value="20">
+                    <input placeholder="Min" name="min" type="number" class="chnageInput" id="min" value="4">
+                    <input placeholder="sec" name="sec" type="number" class="chnageInput" id="sec" value="20">
                     <br>
                     <button type="submit">Change</button>
                 </form>
 
                 <button id="closeRun">Close</button>
+            </div>
+        </div>
+
+        <div id="swimBox">
+            <h1 class="header">Swim Info</h1>
+            <h2 class="runHeadder">Threshold: </h2>
+            <p id="paceP">{{ swimPace }}</p>
+            <br></br>
+            <h2 class="runHeadder">Wetsuit: </h2>
+            <p id="wetsuitP">{{ wetsuit }}</p>
+            <br>
+            <button id="swimBtn">Change info</button>
+
+            <div id="changeSwimInfo">
+
+                <form action="/chnageSwimInfo" method="POST">
+                <h2>Wetsuit</h2>
+                    <input type="text" placeholder="Wetsuit" name="wetsuit" class="chnageInput" id="wetsuit">
+
+                <h2>Threshold</h2>
+                    <input placeholder="Min" name="min" type="number" class="chnageInput" id="min" value="1">
+                    <input placeholder="sec" name="sec" type="number" class="chnageInput" id="sec" value="20">
+                    <br>
+                    <button type="submit">Change</button>
+                </form>
+
+                <button id="closeSwim">Close</button>
             </div>
         </div>
     </body>

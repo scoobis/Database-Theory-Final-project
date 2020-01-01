@@ -35,9 +35,18 @@ function createRunTable(con) {
     'racing_shoe varchar(100) NOT NULL, '+
     'training_shoe varchar(100) NOT NULL, '+
     'PRIMARY KEY(user_id))')
-} 
+}
+
+function createSwimTable(con) {
+    con.query('CREATE TABLE IF NOT EXISTS swim'+
+    '(user_id int NOT NULL, '+
+    'pace int NOT NULL, '+
+    'wetsuit varchar(100) NOT NULL, '+
+    'PRIMARY KEY(user_id))')
+}
 
 exports.createUserTable = createUserTable
 exports.creataBikeTable = creataBikeTable
 exports.createUsersBikesTable = createUsersBikesTable
 exports.createRunTable = createRunTable
+exports.createSwimTable = createSwimTable

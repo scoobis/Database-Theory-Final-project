@@ -26,3 +26,18 @@ document.querySelector('#closeRun').addEventListener('click', () => {
 
   document.getElementById("changeRunInfoWIndow").style.visibility = "hidden";
 })
+
+// open window for chaging swim info
+document.querySelector('#swimBtn').addEventListener('click', () => {
+
+  document.getElementById("changeSwimInfo").style.visibility = "visible";
+
+  document.getElementById("wetsuit").value = document.getElementById("wetsuitP").innerText
+
+})
+
+// close window for chaging swim info
+document.querySelector('#closeSwim').addEventListener('click', () => {
+
+  document.getElementById("changeSwimInfo").style.visibility = "hidden";
+})

@@ -20,7 +20,13 @@ function mainPage (req, res) {
 
   function profile (req, res, con) {
     // query profiles
-    con.query(`SELECT id, first_name, last_name, username, height, weight FROM user WHERE username = ?`, 
+    con.query(`SELECT u.id, u.first_name, u.last_name, u.username, u.height, u.weight , r.pace AS runPace, r.training_shoe, r.racing_shoe, s.pace AS swimPace, s.wetsuit
+    FROM user AS u
+    Inner JOIN run AS r 
+    ON r.user_id = u.id
+    INNER JOIN swim AS s
+    ON s.user_id = u.id
+    WHERE username = ?`, 
     req.originalUrl.substring(9), (err, user) => {
       if (err) throw err
 
@@ -35,9 +41,6 @@ function mainPage (req, res) {
         con.query(`SELECT * FROM bikes`, (err2, allBikes) => {
           if (err2) throw err2
 
-          // query run stats for user
-          con.query(`SELECT pace, training_shoe, racing_shoe FROM run WHERE user_id = "${user[0].id}"`, (err3, run) => {
-            if (err3) throw err3
 
       // checking if url have a user
       if (user.length !== 0) {
@@ -48,16 +51,17 @@ function mainPage (req, res) {
             weight: user[0].weight,
             bikeList: usersbikes,
             bikes: allBikes,
-            pace: Math.floor(run[0].pace / 60)+ ':' +run[0].pace % 60,
-            trainingShoe: run[0].training_shoe,
-            racingShoe: run[0].racing_shoe
+            pace: Math.floor(user[0].runPace / 60)+ ':' +user[0].runPace % 60,
+            trainingShoe: user[0].training_shoe,
+            racingShoe: user[0].racing_shoe,
+            swimPace: user[0].swimPace,
+            wetsuit: user[0].wetsuit
     
           })
     } else {
       res.render('index')
     }
   })
-})
 })
     })
   }

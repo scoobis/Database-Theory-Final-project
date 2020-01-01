@@ -36,6 +36,7 @@ con.connect(function (err) {
     createTable.creataBikeTable(con)
     createTable.createUsersBikesTable(con)
     createTable.createRunTable(con)
+    createTable.createSwimTable(con)
   }
 })
 
@@ -83,6 +84,10 @@ app.engine('handlebars', handle({
 
   app.post('/chnageRunInfo', (req, res) => {
     posts.chnageRunInfo(req, res, con)
+  })
+
+  app.post('/chnageSwimInfo', (req, res) => {
+    posts.changeSwimInfo(req, res, con)
   })
 
 
