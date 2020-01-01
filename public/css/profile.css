@@ -11,9 +11,17 @@ body {background-image: linear-gradient(to right, rgb(143, 0, 143) , rgb(68, 0, 
 button {margin: 20px; border-color: black; padding: 10px; font-size: 20px; font-weight: bold; border-radius: 10px; cursor: pointer; box-shadow: 3px 3px; background-color: rgb(255, 82, 241);}
 button:hover {box-shadow: 8px 8px; border-radius: 15px; transition-duration: 200ms;}
 
-#newBikeWindows {margin-top: -100px;background-color: aqua; padding: 15px; border: 1px solid black; border-radius: 10px; box-shadow: 3px 3px; position: absolute; width: 500px; visibility: hidden;}
+#newBikeWindows, #changeRunInfoWIndow {z-index: 2; text-align: center; margin-top: -100px;background-color: aqua; padding: 15px; border: 1px solid black; border-radius: 10px; box-shadow: 3px 3px; position: absolute; width: 500px; visibility: hidden;}
 
 option, select {font-size: 20px; background: rgb(143, 0, 143); border-radius: 5px; outline: none; border: 1px solid black;}
 
 #runBox {left: 500px}
 
+.chnageRunInput {font-size: 18px; background: rgb(143, 0, 143); border-radius: 5px; outline: none; border: 1px solid black; text-align: center; margin-top: 20px;}
+
+#min, #sec {width: 80px; margin-top: 0px;}
+
+#trainingShoeP, #racingShoeP, #paceP {display: inline; font-size: 18px; font-weight: bold;}
+
+.runHeadder {display: inline;}
+.shoeLabel {display: block; margin-bottom: -10px;}

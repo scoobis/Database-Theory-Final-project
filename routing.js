@@ -48,7 +48,7 @@ function mainPage (req, res) {
             weight: user[0].weight,
             bikeList: usersbikes,
             bikes: allBikes,
-            pace: run[0].pace,
+            pace: Math.floor(run[0].pace / 60)+ ':' +run[0].pace % 60,
             trainingShoe: run[0].training_shoe,
             racingShoe: run[0].racing_shoe
     

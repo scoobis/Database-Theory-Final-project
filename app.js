@@ -81,6 +81,10 @@ app.engine('handlebars', handle({
     posts.addNewBike(req, res, con)
   })
 
+  app.post('/chnageRunInfo', (req, res) => {
+    posts.chnageRunInfo(req, res, con)
+  })
+
 
 // catch 404
 app.use((req, res, next) => {

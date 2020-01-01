@@ -49,6 +49,17 @@ function addNewBike(req, res, con) {
     res.redirect(req.get('referer'))
 }
 
+function chnageRunInfo(req, res, con) {
+    if (req.session.userID) {
+        let pace = req.body.min * 6 + req.body.sec
+        con.query(`UPDATE run SET pace = ${parseInt(req.body.min * 60) + parseInt(req.body.sec)}, 
+        racing_shoe = "${req.body.racingShoe}", training_shoe = "${req.body.trainingShoe}" 
+        WHERE user_id = ${req.session.userID}`)
+        }
+        res.redirect(req.get('referer'))
+}
+
 exports.login = login
 exports.register = register
 exports.addNewBike = addNewBike
+exports.chnageRunInfo = chnageRunInfo

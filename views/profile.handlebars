@@ -25,12 +25,14 @@
             <button id="newBike">Add Bike</button>
 
         <div id="newBikeWindows" class="test">
+            <h2>Bike</h2>
            <form action="/addNewBike" method="POST">
                 <select name="bike">
                     {{#each bikes}}
                     <option value="{{ this.id }}">{{this.brand}} | {{this.model}}</option>
                     {{/each}}
                 </select>
+                <br>
                     <button type="submit">Add</button>
             </form>
             <button id="close">Close</button>
@@ -39,10 +41,37 @@
 
         <div id="runBox">
             <h1 class="header">Run Info</h1>
-            <h2>Threshold: {{ pace }}</h2>
-            <h2>Training shoe: {{ trainingShoe }}</h2>
-            <h2>Racing shoe: {{ racingShoe }}</h2>
-            <button id="newBike">Change info</button>
+            <h2 class="runHeadder">Threshold: </h2>
+            <p id="paceP">{{ pace }}</p>
+            <br></br>
+            <h2 class="runHeadder">Training shoe: </h2>
+            <p id="trainingShoeP">{{ trainingShoe }}</p>
+            <br></br>
+            <h2 class="runHeadder">Racing shoe: </h2>
+            <p id="racingShoeP">{{ racingShoe }}</p>
+            <br>
+            <button id="runBtn">Change info</button>
+
+            <div id="changeRunInfoWIndow">
+                <h2>Shoes</h2>
+                <form action="/chnageRunInfo" method="POST">
+                <label class="shoeLabel" for="trainingShoe">Training shoe:</label>
+                    <input type="text" placeholder="Training Shoe" name="trainingShoe" class="chnageRunInput" id="trainingShoe">
+                    <br>
+                    <label class="shoeLabel" for="racingShoe">Racing shoe:</label>
+                    <input type="text" placeholder="Racing Shoe" name="racingShoe" class="chnageRunInput" id="racingShoe">
+
+                    <br></br>
+
+                <h2>Threshold</h2>
+                    <input placeholder="Min" name="min" type="number" class="chnageRunInput" id="min" value="4">
+                    <input placeholder="sec" name="sec" type="number" class="chnageRunInput" id="sec" value="20">
+                    <br>
+                    <button type="submit">Change</button>
+                </form>
+
+                <button id="closeRun">Close</button>
+            </div>
         </div>
     </body>
 
