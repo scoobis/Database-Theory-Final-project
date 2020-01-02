@@ -90,6 +90,10 @@ app.engine('handlebars', handle({
     posts.changeSwimInfo(req, res, con)
   })
 
+  app.post('/editProfile', (req, res) => {
+    posts.editHeightAndWeight(req, res, con)
+  })
+
 
 // catch 404
 app.use((req, res, next) => {

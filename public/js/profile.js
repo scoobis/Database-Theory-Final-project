@@ -41,3 +41,18 @@ document.querySelector('#closeSwim').addEventListener('click', () => {
 
   document.getElementById("changeSwimInfo").style.visibility = "hidden";
 })
+
+// open window for edit profile
+document.querySelector('#editHW').addEventListener('click', () => {
+
+  document.getElementById("editHWContainer").style.visibility = "visible";
+
+  document.getElementById("weight").value = document.getElementById("weightValue").innerText
+  document.getElementById("height").value = document.getElementById("heightValue").innerText
+
+})
+
+document.querySelector('#closeEditProfile').addEventListener('click', () => {
+
+  document.getElementById("editHWContainer").style.visibility = "hidden";
+})

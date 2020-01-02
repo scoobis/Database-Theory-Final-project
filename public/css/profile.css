@@ -2,7 +2,7 @@ body {background-image: linear-gradient(to right, rgb(143, 0, 143) , rgb(68, 0, 
 
 #username {text-align: center; margin-top: 50px}
 #name {text-align: center;}
-#values {text-align: center;}
+.profileValues {display: inline;}
 
 #bikes, #runBox, #swimBox {border: 2px solid black; padding: 25px; border-radius: 15px; width: 400px; position: absolute; }
 .bike {border: 1px solid black; padding: 10px; border-radius: 10px; margin: 20px;}
@@ -11,7 +11,7 @@ body {background-image: linear-gradient(to right, rgb(143, 0, 143) , rgb(68, 0, 
 button {margin: 20px; border-color: black; padding: 10px; font-size: 20px; font-weight: bold; border-radius: 10px; cursor: pointer; box-shadow: 3px 3px; background-color: rgb(255, 82, 241);}
 button:hover {box-shadow: 8px 8px; border-radius: 15px; transition-duration: 200ms;}
 
-#newBikeWindows, #changeRunInfoWIndow, #changeSwimInfo {z-index: 2; text-align: center; margin-top: -100px;background-color: aqua; padding: 15px; border: 1px solid black; border-radius: 10px; box-shadow: 3px 3px; position: absolute; width: 500px; visibility: hidden;}
+#newBikeWindows, #changeRunInfoWIndow, #changeSwimInfo, #editHWContainer {z-index: 2; text-align: center; margin-top: -100px;background-color: aqua; padding: 15px; border: 1px solid black; border-radius: 10px; box-shadow: 3px 3px; position: absolute; width: 500px; visibility: hidden;}
 
 option, select {font-size: 20px; background: rgb(143, 0, 143); border-radius: 5px; outline: none; border: 1px solid black;}
 
@@ -26,3 +26,8 @@ option, select {font-size: 20px; background: rgb(143, 0, 143); border-radius: 5p
 
 .runHeadder {display: inline;}
 .shoeLabel {display: block; margin-bottom: -10px;}
+
+#editHW {display: inline; padding: 5px;}
+#values {display: inline; margin-left: 100px;}
+
+#profileContainer {text-align: center;}

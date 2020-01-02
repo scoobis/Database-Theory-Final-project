@@ -11,8 +11,27 @@
 
     <div id="profileContainer">
         <h1 id="username">{{ username }}</h1>
-        <p id="values">Height: {{ height }}cm Weight: {{ weight }}kg</p>
-        <button id="editHW">Test</button>
+        <p class="profileValues">Height:</p>
+        <p class="profileValues" id="heightValue">{{ height }}</p>
+        <p class="profileValues">cm</p>
+        <p class="profileValues">Weight:</p>
+        <p class="profileValues" id="weightValue">{{ weight }}</p>
+        <p class="profileValues">kg</p>
+
+            <button id="editHW">Edit</button>
+
+        <div id="editHWContainer">
+            <form method="POST" action="/editProfile">
+                    <label class="shoeLabel" for="weight">Weight (kg)</label>
+                    <input type="number" placeholder="Weight" name="weight" class="chnageInput" id="weight">
+                    <br>
+                    <label class="shoeLabel" for="height">Height (cm)</label>
+                    <input type="number" placeholder="Height" name="height" class="chnageInput" id="height">
+                    <br>
+                    <button type="submit">Edit</button>
+            </form>
+            <button id="closeEditProfile">Close</button>
+        </div>
         <h2 id="name">{{ name }}</h2>
     </div>
 

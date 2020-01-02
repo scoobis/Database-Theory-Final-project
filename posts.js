@@ -72,8 +72,18 @@ function changeSwimInfo(req, res, con) {
         res.redirect(req.get('referer'))
 }
 
+function editHeightAndWeight(req, res, con) {
+    if (req.session.userID) {
+        con.query(`UPDATE user SET weight = ${parseInt(req.body.weight)}, 
+        height = "${parseInt(req.body.height)}" 
+        WHERE id = ${req.session.userID}`)
+        }
+        res.redirect(req.get('referer'))
+}
+
 exports.login = login
 exports.register = register
 exports.addNewBike = addNewBike
 exports.chnageRunInfo = chnageRunInfo
 exports.changeSwimInfo = changeSwimInfo
+exports.editHeightAndWeight = editHeightAndWeight
