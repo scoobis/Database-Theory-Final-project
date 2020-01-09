@@ -45,8 +45,31 @@ function createSwimTable(con) {
     'PRIMARY KEY(user_id))')
 }
 
+function createEventTable(con) {
+    con.query('CREATE TABLE IF NOT EXISTS event'+
+    '(id int NOT NULL AUTO_INCREMENT, '+
+    'brand varchar(100) NOT NULL, '+
+    'location varchar(100) NOT NULL, '+
+    'distance varchar(100) NOT NULL, '+
+    'date varchar(100) NOT NULL, '+
+    'PRIMARY KEY(id))')
+}
+
+function createUsersEvents(con) {
+    con.query('CREATE TABLE IF NOT EXISTS usersevents'+
+    '(user_id int NOT NULL, '+
+    'event_id int NOT NULL, '+
+    'swimTime int NOT NULL, '+
+    'T1 int NOT NULL, '+
+    'bikeTime int NOT NULL, '+
+    'T2 int NOT NULL, '+
+    'runTime int NOT NULL)')
+}
+
 exports.createUserTable = createUserTable
 exports.creataBikeTable = creataBikeTable
 exports.createUsersBikesTable = createUsersBikesTable
 exports.createRunTable = createRunTable
 exports.createSwimTable = createSwimTable
+exports.createEventTable = createEventTable
+exports.createUsersEvents = createUsersEvents

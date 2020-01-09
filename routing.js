@@ -41,6 +41,11 @@ function mainPage (req, res) {
         con.query(`SELECT * FROM bikes`, (err2, allBikes) => {
           if (err2) throw err2
 
+          con.query(`SELECT e.brand, e.location, e.distance, e.date, u.swimTime, u.T1, u.bikeTime, u.T2, u.runTime  FROM event AS e
+          INNER JOIN usersevents AS u
+          ON e.id = u.event_id
+          WHERE u.user_id = ${user[0].id}`, (err3, usersEvents) => {
+            if (err3) throw err3
 
       // checking if url have a user
       if (user.length !== 0) {
@@ -55,13 +60,15 @@ function mainPage (req, res) {
             trainingShoe: user[0].training_shoe,
             racingShoe: user[0].racing_shoe,
             swimPace: user[0].swimPace,
-            wetsuit: user[0].wetsuit
+            wetsuit: user[0].wetsuit,
+            events: usersEvents
     
           })
     } else {
       res.render('index')
     }
   })
+})
 })
     })
   }

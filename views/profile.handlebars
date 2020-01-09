@@ -35,7 +35,7 @@
         <h2 id="name">{{ name }}</h2>
     </div>
 
-        <div id="bikes">
+        <div id="bikes" class="container">
             <h1 class="header">Bikes</h1>
             {{#each bikeList}}
             <div class="bike">
@@ -61,7 +61,7 @@
         </div>
         </div>
 
-        <div id="runBox">
+        <div id="runBox" class="container">
             <h1 class="header">Run Info</h1>
             <h2 class="runHeadder">Threshold: </h2>
             <p id="paceP">{{ pace }}</p>
@@ -74,7 +74,7 @@
             <br>
             <button id="runBtn">Change info</button>
 
-            <div id="changeRunInfoWIndow">
+            <div id="changeRunInfoWIndow" class="container">
                 <h2>Shoes</h2>
                 <form action="/chnageRunInfo" method="POST">
                 <label class="shoeLabel" for="trainingShoe">Training shoe:</label>
@@ -96,7 +96,7 @@
             </div>
         </div>
 
-        <div id="swimBox">
+        <div id="swimBox" class="container">
             <h1 class="header">Swim Info</h1>
             <h2 class="runHeadder">Threshold: </h2>
             <p id="paceP">{{ swimPace }}</p>
@@ -121,6 +121,37 @@
 
                 <button id="closeSwim">Close</button>
             </div>
+        </div>
+
+        <div class="container" id="eventContainer">
+            <h1 id="eventHeader">Events</h1>
+
+            {{#each events}}
+            <div class="eventBox">
+                <h2 class="qHeader">{{this.brand}}</h2>
+                <h3 class="qHeader">{{this.distance}}</h3>
+                <h3 class="qHeader">({{this.location}}</h3>
+                <h3 class="qHeader">{{this.date}})</h3>
+
+                <table style="width:100%">
+  <tr>
+    <th>Swim Time</th>
+    <th>T1</th> 
+    <th>Bike Time</th>
+    <th>T2</th>
+    <th>Run Time</th>
+  </tr>
+  <tr>
+    <td class="eventSwimTime">{{this.swimTime}}</td>
+    <td class="eventT1Time">{{this.T1}}</td>
+    <td class="eventBikeTime">{{this.bikeTime}}</td>
+    <td class="eventT2Time">{{this.T2}}</td>
+    <td class="eventRunTime">{{this.runTime}}</td>
+  </tr>
+</table>
+            </div>
+            {{/each}}
+
         </div>
     </body>
 

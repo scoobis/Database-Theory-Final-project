@@ -6,12 +6,10 @@ function login(req, res, con) {
         
         let corect = true
         // check or else it will crach
-        console.log(rows.length)
         if (rows.length === 1) {
         if (bcrypt.compareSync(req.body.password, rows[0].password)) {
             req.session.email = rows[0].email
             req.session.username = rows[0].username
-            req.session.userID = rows[0].id
 
             corect = false
             res.redirect('/')
@@ -27,21 +25,40 @@ function login(req, res, con) {
 }
 
 function register(req, res, con) {
-    // create user
+    const first_name = req.body.first_name
+    const last_name = req.body.last_name
+    const email = req.body.email.toLowerCase()
     let password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(12))
-    con.query(`INSERT INTO user (first_name, last_name, email, password, username, weight, height) `+
-    `VALUES("${req.body.first_name}", "${req.body.last_name}", "${req.body.email.toLowerCase()}", "${password}", "${req.body.username}", 0, 0)`)
+    const username = req.body.username
 
-    res.redirect('/')
-
-    con.query(`SELECT COUNT(id) AS id FROM user`, (err, user) => {
+    con.query(`SELECT email, username FROM user where email = '${email}' OR username = '${username}'`, (err, userCheck) => {
         if (err) throw err
+        
+        // if username or email already exits show that to the user
+        if (userCheck.length !== 0) {
+            if (userCheck[0].email === email) { res.render('register', {emailExists: 'Email already exists'}) }
+            else if (userCheck[0].username = username) { res.render('register', {usernameExists: 'Username already exists'}) }
+        } else {
+            // Run the below code if that user does not exists
+
+    // create user
+    con.query(`INSERT INTO user (first_name, last_name, email, password, username, weight, height) `+
+    `VALUES("${first_name}", "${last_name}", "${email}", "${password}", "${username}", 0, 0)`)
+
+    con.query(`SELECT COUNT(id) AS count FROM user`, (err1, user) => {
+        if (err1) throw err1
 
         // create run info
-        con.query(`INSERT INTO run (user_id, pace, racing_shoe, training_shoe) VALUES(${user[0].id}, 0, "-", "-")`)
+        con.query(`INSERT INTO run (user_id, pace, racing_shoe, training_shoe) VALUES(${user[0].count}, 0, "-", "-")`)
         // create swim info
-        con.query(`INSERT INTO swim (user_id, pace, wetsuit) VALUES(${user[0].id}, 0, "-")`)
+        con.query(`INSERT INTO swim (user_id, pace, wetsuit) VALUES(${user[0].count}, 0, "-")`)
     })
+        req.session.email = email
+        req.session.username = username
+        res.redirect('/')
+    }
+})
+    
 }
 
 function addNewBike(req, res, con) {

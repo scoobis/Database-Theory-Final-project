@@ -4,7 +4,7 @@ body {background-image: linear-gradient(to right, rgb(143, 0, 143) , rgb(68, 0, 
 #name {text-align: center;}
 .profileValues {display: inline;}
 
-#bikes, #runBox, #swimBox {border: 2px solid black; padding: 25px; border-radius: 15px; width: 400px; position: absolute; }
+.container {border: 2px solid black; padding: 25px; border-radius: 15px; width: 400px; position: relative; display: inline-block; vertical-align: top; margin: 20px;}
 .bike {border: 1px solid black; padding: 10px; border-radius: 10px; margin: 20px;}
 .header {text-align: center; margin-top: -10px}
 
@@ -14,9 +14,6 @@ button:hover {box-shadow: 8px 8px; border-radius: 15px; transition-duration: 200
 #newBikeWindows, #changeRunInfoWIndow, #changeSwimInfo, #editHWContainer {z-index: 2; text-align: center; margin-top: -100px;background-color: aqua; padding: 15px; border: 1px solid black; border-radius: 10px; box-shadow: 3px 3px; position: absolute; width: 500px; visibility: hidden;}
 
 option, select {font-size: 20px; background: rgb(143, 0, 143); border-radius: 5px; outline: none; border: 1px solid black;}
-
-#runBox {left: 500px}
-#swimBox {left: 1000px}
 
 .chnageInput {font-size: 18px; background: rgb(143, 0, 143); border-radius: 5px; outline: none; border: 1px solid black; text-align: center; margin-top: 20px;}
 
@@ -31,3 +28,12 @@ option, select {font-size: 20px; background: rgb(143, 0, 143); border-radius: 5p
 #values {display: inline; margin-left: 100px;}
 
 #profileContainer {text-align: center;}
+
+#eventContainer {width: 80%;}
+#eventHeader {text-align: center; margin-top: -10px;}
+
+.eventBox {border: black solid 1px; border-radius: 10px; padding: 10px; text-align: center;}
+.qHeader {display: inline;}
+
+table, th, td {border: 1px solid black; border-collapse: collapse; margin-top: 30px;}
+

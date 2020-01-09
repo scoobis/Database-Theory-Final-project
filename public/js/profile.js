@@ -56,3 +56,46 @@ document.querySelector('#closeEditProfile').addEventListener('click', () => {
 
   document.getElementById("editHWContainer").style.visibility = "hidden";
 })
+
+// coverting all swim times to hr, mins, and sec
+document.querySelectorAll('.eventSwimTime').forEach(node => {
+  calcTimes(node)
+})
+
+// coverting all T1 times to mins and sec
+document.querySelectorAll('.eventT1Time').forEach(node => {
+  calcT(node)
+})
+
+document.querySelectorAll('.eventBikeTime').forEach(node => {
+  calcTimes(node)
+})
+
+document.querySelectorAll('.eventT2Time').forEach(node => {
+  calcT(node)
+})
+
+document.querySelectorAll('.eventRunTime').forEach(node => {
+  calcTimes(node)
+})
+
+function calcTimes(node) {
+  let hour = Math.floor(node.innerText / 3600)
+  let min = Math.floor(node.innerText % 3600 / 60)
+  let sec = Math.floor(node.innerText % 3600 % 60)
+
+  if(min <= 9) min = '0' + min
+  if(sec <= 9) sec = '0' + sec
+
+  node.innerText = hour +':'+ min +':'+ sec
+}
+
+function calcT(node) {
+  let min = Math.floor(node.innerText / 60)
+  let sec = node.innerText % 60
+
+  if(min <= 9) min = '0' + min
+  if(sec <= 9) sec = '0' + sec
+
+  node.innerText = min +':'+ sec
+}
