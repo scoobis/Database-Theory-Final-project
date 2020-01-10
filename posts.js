@@ -1,15 +1,15 @@
 const bcrypt = require('bcrypt')
 
 function login(req, res, con) {
-    con.query('SELECT email, first_name, last_name, username, password, id from user WHERE email = ?', req.body.email, (err, rows) => {
+    con.query('SELECT email, first_name, last_name, username, password from user WHERE email = ?', req.body.email, (err, user) => {
         if (err) throw err
         
         let corect = true
         // check or else it will crach
-        if (rows.length === 1) {
-        if (bcrypt.compareSync(req.body.password, rows[0].password)) {
-            req.session.email = rows[0].email
-            req.session.username = rows[0].username
+        if (user.length === 1) {
+        if (bcrypt.compareSync(req.body.password, user[0].password)) {
+            req.session.email = user[0].email
+            req.session.username = user[0].username
 
             corect = false
             res.redirect('/')
@@ -45,14 +45,10 @@ function register(req, res, con) {
     con.query(`INSERT INTO user (first_name, last_name, email, password, username, weight, height) `+
     `VALUES("${first_name}", "${last_name}", "${email}", "${password}", "${username}", 0, 0)`)
 
-    con.query(`SELECT COUNT(id) AS count FROM user`, (err1, user) => {
-        if (err1) throw err1
-
         // create run info
-        con.query(`INSERT INTO run (user_id, pace, racing_shoe, training_shoe) VALUES(${user[0].count}, 0, "-", "-")`)
+        con.query(`INSERT INTO run (username, pace, racing_shoe, training_shoe) VALUES("${username}", 0, "-", "-")`)
         // create swim info
-        con.query(`INSERT INTO swim (user_id, pace, wetsuit) VALUES(${user[0].count}, 0, "-")`)
-    })
+        con.query(`INSERT INTO swim (username, pace, wetsuit) VALUES("${username}", 0, "-")`)
         req.session.email = email
         req.session.username = username
         res.redirect('/')
@@ -63,37 +59,37 @@ function register(req, res, con) {
 
 function addNewBike(req, res, con) {
     if (req.session.userID) {
-    con.query(`INSERT INTO usersbikes (user_id, bike_id)
-    VALUES(${req.session.userID}, ${req.body.bike})`)
+    con.query(`INSERT INTO usersbikes (username, bike_id)
+    VALUES(${req.session.username}, ${req.body.bike})`)
     }
     res.redirect(req.get('referer'))
 }
 
 function chnageRunInfo(req, res, con) {
-    if (req.session.userID) {
+    if (req.session.username) {
         let pace = req.body.min * 6 + req.body.sec
         con.query(`UPDATE run SET pace = ${parseInt(req.body.min * 60) + parseInt(req.body.sec)}, 
         racing_shoe = "${req.body.racingShoe}", training_shoe = "${req.body.trainingShoe}" 
-        WHERE user_id = ${req.session.userID}`)
+        WHERE username = '${req.session.username}'`)
         }
         res.redirect(req.get('referer'))
 }
 
 function changeSwimInfo(req, res, con) {
-    if (req.session.userID) {
+    if (req.session.username) {
         let pace = req.body.min * 6 + req.body.sec
         con.query(`UPDATE swim SET pace = ${parseInt(req.body.min * 60) + parseInt(req.body.sec)}, 
         wetsuit = "${req.body.wetsuit}" 
-        WHERE user_id = ${req.session.userID}`)
+        WHERE username = "${req.session.username}"`)
         }
         res.redirect(req.get('referer'))
 }
 
 function editHeightAndWeight(req, res, con) {
-    if (req.session.userID) {
+    if (req.session.username) {
         con.query(`UPDATE user SET weight = ${parseInt(req.body.weight)}, 
         height = "${parseInt(req.body.height)}" 
-        WHERE id = ${req.session.userID}`)
+        WHERE username = "${req.session.username}"`)
         }
         res.redirect(req.get('referer'))
 }

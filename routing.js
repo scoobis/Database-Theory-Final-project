@@ -20,13 +20,13 @@ function mainPage (req, res) {
 
   function profile (req, res, con) {
     // query profiles
-    con.query(`SELECT u.id, u.first_name, u.last_name, u.username, u.height, u.weight , r.pace AS runPace, r.training_shoe, r.racing_shoe, s.pace AS swimPace, s.wetsuit
+    con.query(`SELECT u.first_name, u.last_name, u.username, u.height, u.weight, r.pace AS runPace, r.training_shoe, r.racing_shoe, s.pace AS swimPace, s.wetsuit
     FROM user AS u
     Inner JOIN run AS r 
-    ON r.user_id = u.id
+    ON r.username = u.username
     INNER JOIN swim AS s
-    ON s.user_id = u.id
-    WHERE username = ?`, 
+    ON s.username = u.username
+    WHERE u.username = ?`, 
     req.originalUrl.substring(9), (err, user) => {
       if (err) throw err
 
@@ -34,7 +34,7 @@ function mainPage (req, res) {
       con.query(`SELECT brand, price, model FROM bikes AS b 
        INNER JOIN usersbikes AS ub 
        ON b.id = ub.bike_id
-       WHERE ub.user_id = ${user[0].id}`, (err1, usersbikes) => {
+       WHERE ub.username = "${user[0].username}"`, (err1, usersbikes) => {
         if (err1) throw err1
 
         // query all bikes if user want to add bikes
@@ -44,7 +44,7 @@ function mainPage (req, res) {
           con.query(`SELECT e.brand, e.location, e.distance, e.date, u.swimTime, u.T1, u.bikeTime, u.T2, u.runTime  FROM event AS e
           INNER JOIN usersevents AS u
           ON e.id = u.event_id
-          WHERE u.user_id = ${user[0].id}`, (err3, usersEvents) => {
+          WHERE u.username = "${user[0].username}"`, (err3, usersEvents) => {
             if (err3) throw err3
 
       // checking if url have a user

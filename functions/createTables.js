@@ -1,8 +1,7 @@
 
 function createUserTable(con) {
     con.query('CREATE TABLE IF NOT EXISTS user'+
-    '(id int NOT NULL AUTO_INCREMENT, '+
-    'first_name varchar(100) NOT NULL, '+
+    '(first_name varchar(100) NOT NULL, '+
     'last_name varchar(100) NOT NULL, '+
     'email varchar(155) NOT NULL, '+
     'password varchar(155),'+
@@ -10,7 +9,7 @@ function createUserTable(con) {
     'height int, '+
     'country varchar(100), '+
     'username varchar(100), '+
-    'PRIMARY KEY(id))')
+    'PRIMARY KEY(username))')
 }
 
 function creataBikeTable(con) {
@@ -24,25 +23,25 @@ function creataBikeTable(con) {
 
 function createUsersBikesTable(con) {
     con.query('CREATE TABLE IF NOT EXISTS usersbikes'+
-    '(user_id int NOT NULL, '+
+    '(username varchar(100) NOT NULL, '+
     'bike_id int NOT NULL)')
 }
 
 function createRunTable(con) {
     con.query('CREATE TABLE IF NOT EXISTS run'+
-    '(user_id int NOT NULL, '+
+    '(username varchar(100) NOT NULL, '+
     'pace int NOT NULL, '+
     'racing_shoe varchar(100) NOT NULL, '+
     'training_shoe varchar(100) NOT NULL, '+
-    'PRIMARY KEY(user_id))')
+    'PRIMARY KEY(username))')
 }
 
 function createSwimTable(con) {
     con.query('CREATE TABLE IF NOT EXISTS swim'+
-    '(user_id int NOT NULL, '+
+    '(username varchar(100) NOT NULL, '+
     'pace int NOT NULL, '+
     'wetsuit varchar(100) NOT NULL, '+
-    'PRIMARY KEY(user_id))')
+    'PRIMARY KEY(username))')
 }
 
 function createEventTable(con) {
@@ -57,7 +56,7 @@ function createEventTable(con) {
 
 function createUsersEvents(con) {
     con.query('CREATE TABLE IF NOT EXISTS usersevents'+
-    '(user_id int NOT NULL, '+
+    '(username varchar(100) NOT NULL, '+
     'event_id int NOT NULL, '+
     'swimTime int NOT NULL, '+
     'T1 int NOT NULL, '+
