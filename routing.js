@@ -48,6 +48,9 @@ function mainPage (req, res) {
           WHERE u.username = "${user.username}"`, (err3, usersEvents) => {
             if (err3) throw err3
 
+            con.query(`SELECT * FROM event`, (err4, allEvents) => {
+              if (err4) throw err4
+
       // checking if url have a user
       if (user.length !== 0) {
           res.render('profile', {
@@ -62,7 +65,8 @@ function mainPage (req, res) {
             racingShoe: user.racing_shoe,
             swimPace: Math.floor(user.swimPace / 60)+ ':' +user.swimPace % 60,
             wetsuit: user.wetsuit,
-            events: usersEvents
+            events: usersEvents,
+            allEvents: allEvents
     
           })
     } else {
@@ -71,10 +75,16 @@ function mainPage (req, res) {
   })
 })
 })
+})
     })
+  }
+
+  function statsPage(res) {
+    res.render('stats')
   }
 
   exports.mainPage = mainPage
   exports.loginPage = loginPage
   exports.registerPage = registerPage
   exports.profile = profile
+  exports.statsPage = statsPage

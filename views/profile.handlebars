@@ -24,7 +24,7 @@
 
             <button id="editHW">Edit</button>
 
-        <div id="editHWContainer">
+        <div id="editHWContainer" class="editContainer">
             <form method="POST" action="/editProfile">
                     <label class="shoeLabel" for="weight">Weight (kg)</label>
                     <input type="number" placeholder="Weight" name="weight" class="chnageInput" id="weight">
@@ -50,7 +50,7 @@
             {{/each}}
             <button id="newBike">Add Bike</button>
 
-        <div id="newBikeWindows" class="test">
+        <div id="newBikeWindows" class="editContainer">
             <h2>Bike</h2>
            <form action="/addNewBike" method="POST">
                 <select name="bike">
@@ -110,7 +110,7 @@
             <br>
             <button id="swimBtn">Change info</button>
 
-            <div id="changeSwimInfo">
+            <div id="changeSwimInfo" class="editContainer">
 
                 <form action="/chnageSwimInfo" method="POST">
                 <h2>Wetsuit</h2>
@@ -156,7 +156,36 @@
             </div>
             {{/each}}
 
+            <button id="addEvent">+</button>
         </div>
+
+        <div id="addEventContainer" class="editContainer">
+                
+                <form method="POST" action="/addNewEvent">
+                <h2>Event</h2>
+                <select name="event">
+                    {{#each allEvents}}
+                    <option value="{{ this.id }}">{{this.brand}} | {{this.distance}} ({{this.location}} {{this.date}})</option>
+                    {{/each}}
+                    </select>
+
+                    <p class="addEventP">Swim time (sec)</p>
+                    <input placeholder="Swim Time (sec)" name="swimTime" type="number" class="chnageInput" value="3600">
+                    <p class="addEventP">T1 (sec)</p>
+                    <input placeholder="T1 (sec)" name="T1" type="number" class="chnageInput" value="180">
+                    <p class="addEventP">Bike time (sec)</p>
+                    <input placeholder="Bike Time (sec)" name="bikeTime" type="number" class="chnageInput" value="18000">
+                    <p class="addEventP">T2 (sec)</p>
+                    <input placeholder="T2 (sec)" name="T2" type="number" class="chnageInput" value="210">
+                    <p class="addEventP">Run time (sec)</p>
+                    <input placeholder="Run Time (sec)" name="runTime" type="number" class="chnageInput" value="10800">
+
+                    <br>
+                     <button type="submit">Add Event</button>
+                </form>
+
+                <button id="closeEvent">Close</button>
+            </div>
     </body>
 
     <script type="text/javascript" src="/js/profile.js"></script>

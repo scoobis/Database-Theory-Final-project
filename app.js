@@ -71,6 +71,10 @@ app.engine('handlebars', handle({
     routing.registerPage(res)
   })
 
+  app.get('/stats', (req, res) => {
+    routing.statsPage(res)
+  })
+
   // POST
   app.post('/login', (req, res) => {
     posts.login(req, res, con)
@@ -94,6 +98,10 @@ app.engine('handlebars', handle({
 
   app.post('/editProfile', (req, res) => {
     posts.editHeightAndWeight(req, res, con)
+  })
+
+  app.post('/addNewEvent', (req, res) => {
+    posts.addNewEvent(req, res, con)
   })
 
 

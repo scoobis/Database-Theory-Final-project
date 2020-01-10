@@ -52,6 +52,19 @@ document.querySelector('#editHW').addEventListener('click', () => {
 
 })
 
+// open windows for add event
+document.querySelector('#addEvent').addEventListener('click', () => {
+
+  document.getElementById("addEventContainer").style.visibility = "visible";
+
+})
+
+// close window for adding event
+document.querySelector('#closeEvent').addEventListener('click', () => {
+
+  document.getElementById("addEventContainer").style.visibility = "hidden";
+})
+
 document.querySelector('#closeEditProfile').addEventListener('click', () => {
 
   document.getElementById("editHWContainer").style.visibility = "hidden";

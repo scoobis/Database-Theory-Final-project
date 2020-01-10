@@ -94,9 +94,17 @@ function editHeightAndWeight(req, res, con) {
         res.redirect(req.get('referer'))
 }
 
+function addNewEvent(req, res, con) {
+    con.query(`INSERT INTO usersevents (username, event_id, swimTime, T1, bikeTime, T2, runTime) 
+    VALUES("${req.session.username}", ${req.body.event}, ${req.body.swimTime}, ${req.body.T1}, ${req.body.bikeTime}, ${req.body.T2}, ${req.body.runTime})`)
+
+    res.redirect(req.get('referer'))
+}
+
 exports.login = login
 exports.register = register
 exports.addNewBike = addNewBike
 exports.chnageRunInfo = chnageRunInfo
 exports.changeSwimInfo = changeSwimInfo
 exports.editHeightAndWeight = editHeightAndWeight
+exports.addNewEvent = addNewEvent
