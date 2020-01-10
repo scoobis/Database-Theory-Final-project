@@ -9,6 +9,10 @@
     </head>
     <body>
 
+        <div id="menuBar">
+            <a href="/stats" class="menuButton">Stats</a>
+        </div>
+
     <div id="profileContainer">
         <h1 id="username">{{ username }}</h1>
         <p class="profileValues">Height:</p>
@@ -40,7 +44,7 @@
             {{#each bikeList}}
             <div class="bike">
                 <h2>Brand: {{ this.brand }}</h2>
-                <h2>Model: {{ this.model }}</h2>
+                <h2>Model: {{ this.model }} | {{ this.manfyear }}</h2>
                 <h3>Price: ${{ this.price }}</h3>
             </div>
             {{/each}}
@@ -51,7 +55,7 @@
            <form action="/addNewBike" method="POST">
                 <select name="bike">
                     {{#each bikes}}
-                    <option value="{{ this.id }}">{{this.brand}} | {{this.model}}</option>
+                    <option value="{{ this.id }}">{{this.brand}} | {{this.model}} | {{this.manfyear}}</option>
                     {{/each}}
                 </select>
                 <br>

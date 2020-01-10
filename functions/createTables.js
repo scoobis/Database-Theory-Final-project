@@ -18,6 +18,7 @@ function creataBikeTable(con) {
     'brand varchar(100) NOT NULL, '+
     'model varchar(100) NOT NULL, '+
     'price int NOT NULL, '+
+    'manfyear int NOT NULL, '+
     'PRIMARY KEY(id))')
 }
 

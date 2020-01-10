@@ -58,9 +58,9 @@ function register(req, res, con) {
 }
 
 function addNewBike(req, res, con) {
-    if (req.session.userID) {
+    if (req.session.username) {
     con.query(`INSERT INTO usersbikes (username, bike_id)
-    VALUES(${req.session.username}, ${req.body.bike})`)
+    VALUES("${req.session.username}", ${req.body.bike})`)
     }
     res.redirect(req.get('referer'))
 }

@@ -27,14 +27,15 @@ function mainPage (req, res) {
     INNER JOIN swim AS s
     ON s.username = u.username
     WHERE u.username = ?`, 
-    req.originalUrl.substring(9), (err, user) => {
+    req.originalUrl.substring(9), (err, u) => {
       if (err) throw err
+      const user = u[0]
 
       // query users bikes
-      con.query(`SELECT brand, price, model FROM bikes AS b 
+      con.query(`SELECT brand, price, manfyear, model FROM bikes AS b 
        INNER JOIN usersbikes AS ub 
        ON b.id = ub.bike_id
-       WHERE ub.username = "${user[0].username}"`, (err1, usersbikes) => {
+       WHERE ub.username = "${user.username}"`, (err1, usersbikes) => {
         if (err1) throw err1
 
         // query all bikes if user want to add bikes
@@ -44,23 +45,23 @@ function mainPage (req, res) {
           con.query(`SELECT e.brand, e.location, e.distance, e.date, u.swimTime, u.T1, u.bikeTime, u.T2, u.runTime  FROM event AS e
           INNER JOIN usersevents AS u
           ON e.id = u.event_id
-          WHERE u.username = "${user[0].username}"`, (err3, usersEvents) => {
+          WHERE u.username = "${user.username}"`, (err3, usersEvents) => {
             if (err3) throw err3
 
       // checking if url have a user
       if (user.length !== 0) {
           res.render('profile', {
-            username: user[0].username,
-            name: user[0].first_name +' '+ user[0].last_name,
-            height: user[0].height,
-            weight: user[0].weight,
+            username: user.username,
+            name: user.first_name +' '+ user.last_name,
+            height: user.height,
+            weight: user.weight,
             bikeList: usersbikes,
             bikes: allBikes,
-            pace: Math.floor(user[0].runPace / 60)+ ':' +user[0].runPace % 60,
-            trainingShoe: user[0].training_shoe,
-            racingShoe: user[0].racing_shoe,
-            swimPace: user[0].swimPace,
-            wetsuit: user[0].wetsuit,
+            pace: Math.floor(user.runPace / 60)+ ':' +user.runPace % 60,
+            trainingShoe: user.training_shoe,
+            racingShoe: user.racing_shoe,
+            swimPace: Math.floor(user.swimPace / 60)+ ':' +user.swimPace % 60,
+            wetsuit: user.wetsuit,
             events: usersEvents
     
           })
