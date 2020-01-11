@@ -72,7 +72,7 @@ app.engine('handlebars', handle({
   })
 
   app.get('/stats', (req, res) => {
-    routing.statsPage(res)
+    routing.statsPage(req, res, con)
   })
 
   // POST

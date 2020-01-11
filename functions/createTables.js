@@ -31,7 +31,7 @@ function createUsersBikesTable(con) {
 function createRunTable(con) {
     con.query('CREATE TABLE IF NOT EXISTS run'+
     '(username varchar(100) NOT NULL, '+
-    'pace int NOT NULL, '+
+    'pace int, '+
     'racing_shoe varchar(100) NOT NULL, '+
     'training_shoe varchar(100) NOT NULL, '+
     'PRIMARY KEY(username))')

@@ -79,8 +79,37 @@ function mainPage (req, res) {
     })
   }
 
-  function statsPage(res) {
-    res.render('stats')
+  function statsPage(req, res, con) {
+
+    // most popular bikes
+    con.query(`SELECT b.brand, b.model, b.manfyear
+    FROM bikes AS b
+    INNER JOIN usersbikes as ub
+    ON b.id = ub.bike_id
+    GROUP BY b.model
+    ORDER BY COUNT(*) DESC LIMIT 10`, (err, mostPopularBikes ) => {
+      if(err) throw err
+
+      // all users
+      con.query(`SELECT username, first_name, last_name FROM user`, (err1, allUsers) => {
+        if (err1) throw err1
+
+      con.query(`SELECT u.username, r.pace FROM user AS u
+      INNER JOIN run AS r
+      ON u.username = r.username
+      WHERE r.pace <> 0
+      GROUP BY u.username
+      ORDER BY r.pace LIMIT 10`, (err2, fastestRunners) => {
+        if (err2) throw err2
+
+    res.render('stats', {
+      mostPopularBikes: mostPopularBikes,
+      allUsers: allUsers,
+      fastestRunners: fastestRunners
+    })
+  })
+})
+})
   }
 
   exports.mainPage = mainPage

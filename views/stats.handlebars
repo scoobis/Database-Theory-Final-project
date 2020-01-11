@@ -11,8 +11,35 @@
 
         <h1 id="home"><a href="/">Home</a></h1>
 
-        <div>
-            <h2>Most popular bike</h2>
+        <div class="container">
+            <h2>Most popular bikes</h2>
+            <ol>
+                {{#each mostPopularBikes}}
+                    <li class="list">{{this.brand}} | {{this.model}} | {{this.manfyear}}</li>
+                {{/each}}
+            </ol>
+        </div>
+
+        <div class="container">
+            <h2>All users</h2>
+
+           <ul>
+                {{#each allUsers}}
+                    <li class="list">{{ this.first_name }} {{ this.last_name }} ({{ this.username }})</li>
+                {{/each}}
+            </ul>
+        </div>
+
+        <div class="container">
+            <h2>Fastest runners</h2>
+            <p id="info">(Only runners that have set their pace is shown!)</p>
+
+            <ol>
+                {{#each fastestRunners}}
+                    <li class="list">{{ this.username }} - {{ this.pace }}</li>
+                {{/each}}
+            </ol>
+
         </div>
 
     </body>
