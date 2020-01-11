@@ -21,6 +21,30 @@
         </div>
 
         <div class="container">
+            <h2>Most popular accessories</h2>
+
+            <h3 class="acces">Wetsuit:</h3>
+            <p class="acces">{{ mostPopularWetsuit }}</p>
+            <br>
+            <h3 class="acces">Training shoe:</h3>
+            <p class="acces">{{ mostPopularTrainingShoe }}</p>
+            <br>
+            <h3 class="acces">Racing shoe:</h3>
+            <p class="acces">{{ mostPopularRacingShoe }}</p>
+        </div>
+
+        <div class="container" id="eventContainer">
+            <h2>Most popular events</h2>
+
+             <ol>
+                {{#each mostPopularEvents}}
+                    <li class="list">{{this.brand}} | {{this.distance}} ({{this.location}} {{this.date}})</li>
+                {{/each}}
+            </ol>
+
+        </div>
+
+        <div class="container">
             <h2>All users</h2>
 
            <ul>
@@ -36,11 +60,12 @@
 
             <ol>
                 {{#each fastestRunners}}
-                    <li class="list">{{ this.username }} - {{ this.pace }}</li>
+                    <li class="list">{{ this.username }} - <p class="runTimes">{{ this.pace }}</p></li>
                 {{/each}}
             </ol>
 
         </div>
 
     </body>
+    <script type="text/javascript" src="/js/stats.js"></script>
 </html>

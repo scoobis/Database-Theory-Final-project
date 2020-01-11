@@ -81,7 +81,7 @@ function mainPage (req, res) {
 
   function statsPage(req, res, con) {
 
-    // most popular bikes
+    // most popular bikes limit to 10
     con.query(`SELECT b.brand, b.model, b.manfyear
     FROM bikes AS b
     INNER JOIN usersbikes as ub
@@ -94,7 +94,9 @@ function mainPage (req, res) {
       con.query(`SELECT username, first_name, last_name FROM user`, (err1, allUsers) => {
         if (err1) throw err1
 
-      con.query(`SELECT u.username, r.pace FROM user AS u
+        // Fastest runners limit to 10
+      con.query(`SELECT u.username, r.pace 
+      FROM user AS u
       INNER JOIN run AS r
       ON u.username = r.username
       WHERE r.pace <> 0
@@ -102,12 +104,36 @@ function mainPage (req, res) {
       ORDER BY r.pace LIMIT 10`, (err2, fastestRunners) => {
         if (err2) throw err2
 
+        con.query(`SELECT s.wetsuit, r.training_shoe, r.racing_shoe
+        FROM user AS u
+        INNER JOIN swim AS s
+        ON u.username = s.username
+        INNER JOIN run AS r
+        ON r.username = u.username
+        GROUP BY u.username
+        ORDER BY COUNT(*)`, (err3, accessories) => {
+          if (err3) throw err3
+
+        con.query(`SELECT e.brand, e.distance, e.location, e.date
+        FROM event AS e
+        INNER JOIN usersevents As us
+        ON us.event_id = e.id
+        GROUP BY e.brand
+        ORDER BY COUNT(*)`, (err4, mostPopularEvents) => {
+          if (err4) throw err4
+
     res.render('stats', {
       mostPopularBikes: mostPopularBikes,
       allUsers: allUsers,
-      fastestRunners: fastestRunners
+      fastestRunners: fastestRunners,
+      mostPopularWetsuit: accessories[0].wetsuit,
+      mostPopularTrainingShoe: accessories[0].training_shoe,
+      mostPopularRacingShoe: accessories[0].racing_shoe,
+      mostPopularEvents: mostPopularEvents
     })
   })
+})
+})
 })
 })
   }
