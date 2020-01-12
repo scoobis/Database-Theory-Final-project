@@ -8,8 +8,8 @@ h2 {text-align: center;}
 .container {border: 2px solid black; padding: 15px; border-radius: 10px; width: 400px; position: relative; display: inline-block; vertical-align: top; margin: 10px;}
 #eventContainer {width: 800px;}
 
-.list, .runTimes {font-size: 20px; margin: 5px;}
-.list:before, .runTimes {display: inline-block;}
-#info {text-align: center; margin-top: -20px;}
+.list, .times {font-size: 20px; margin: 5px;}
+.list:before, .times {display: inline-block;}
+.info {text-align: center; margin-top: -20px;}
 
 .acces {display: inline-block; margin: 5px;}

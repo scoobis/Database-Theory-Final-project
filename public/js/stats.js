@@ -1,5 +1,5 @@
 
-document.querySelectorAll('.runTimes').forEach(node => {
+document.querySelectorAll('.times').forEach(node => {
     calcT(node)
   })
 

@@ -1,26 +1,16 @@
 const bcrypt = require('bcrypt')
+const helpFunctions = require('./functions/helpFunctions')
 
 function login(req, res, con) {
     con.query('SELECT email, first_name, last_name, username, password from user WHERE email = ?', req.body.email, (err, user) => {
         if (err) throw err
-        
-        let corect = true
-        // check or else it will crach
-        if (user.length === 1) {
-        if (bcrypt.compareSync(req.body.password, user[0].password)) {
-            req.session.email = user[0].email
-            req.session.username = user[0].username
 
-            corect = false
-            res.redirect('/')
-        }
-     }
+        // Login if valid information
+        let correct = helpFunctions.loginUser(user, req, res)
 
-     if (corect) {
-        res.render('login', {
-            message: 'Wrong password or email!'
-        })
-     }
+     // Render error message if wrong password or email
+     helpFunctions.errorLogin(res, correct)
+
     })
 }
 
@@ -34,12 +24,8 @@ function register(req, res, con) {
     con.query(`SELECT email, username FROM user where email = '${email}' OR username = '${username}'`, (err, userCheck) => {
         if (err) throw err
         
-        // if username or email already exits show that to the user
-        if (userCheck.length !== 0) {
-            if (userCheck[0].email === email) { res.render('register', {emailExists: 'Email already exists'}) }
-            else if (userCheck[0].username = username) { res.render('register', {usernameExists: 'Username already exists'}) }
-        } else {
-            // Run the below code if that user does not exists
+        if (userCheck.length !== 0) { helpFunctions.userAlreadyExists(userCheck, res) } 
+        else {
 
     // create user
     con.query(`INSERT INTO user (first_name, last_name, email, password, username, weight, height) `+
@@ -47,10 +33,12 @@ function register(req, res, con) {
 
         // create run info
         con.query(`INSERT INTO run (username, pace, racing_shoe, training_shoe) VALUES("${username}", 0, "-", "-")`)
+        
         // create swim info
         con.query(`INSERT INTO swim (username, pace, wetsuit) VALUES("${username}", 0, "-")`)
-        req.session.email = email
-        req.session.username = username
+
+        helpFunctions.holdLogin(req, email, username)
+
         res.redirect('/')
     }
 })
@@ -101,6 +89,13 @@ function addNewEvent(req, res, con) {
     res.redirect(req.get('referer'))
 }
 
+function logout(req, res) {
+    req.session.email = null
+    req.session.username = null
+
+    res.redirect('/')
+}
+
 exports.login = login
 exports.register = register
 exports.addNewBike = addNewBike
@@ -108,3 +103,4 @@ exports.chnageRunInfo = chnageRunInfo
 exports.changeSwimInfo = changeSwimInfo
 exports.editHeightAndWeight = editHeightAndWeight
 exports.addNewEvent = addNewEvent
+exports.logout = logout
