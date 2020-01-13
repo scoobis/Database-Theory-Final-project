@@ -61,12 +61,7 @@ function mainPage (req, res) {
   function statsPage(req, res, con) {
 
     // most popular bikes limit to 10
-    con.query(`SELECT b.brand, b.model, b.manfyear
-    FROM bikes AS b
-    JOIN usersbikes as ub
-    ON b.id = ub.bike_id
-    GROUP BY b.model
-    ORDER BY COUNT(*) DESC LIMIT 10`, (err, mostPopularBikes ) => {
+    con.query(`SELECT * FROM mostPopularBikes`, (err, mostPopularBikes ) => {
       if(err) throw err
 
       // all users
@@ -90,7 +85,6 @@ function mainPage (req, res) {
         ON u.username = s.username
         JOIN run AS r
         ON r.username = u.username
-        GROUP BY u.username
         ORDER BY COUNT(*)`, (err3, accessories) => {
           if (err3) throw err3
 

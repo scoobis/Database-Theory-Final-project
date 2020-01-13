@@ -21,6 +21,7 @@ function register(req, res, con) {
     let password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(12))
     const username = req.body.username
 
+    // Query for checking if email or username exits
     con.query(`SELECT email, username FROM user where email = '${email}' OR username = '${username}'`, (err, userCheck) => {
         if (err) throw err
         
@@ -33,7 +34,7 @@ function register(req, res, con) {
 
         // create run info
         con.query(`INSERT INTO run (username, pace, racing_shoe, training_shoe) VALUES("${username}", 0, "-", "-")`)
-        
+
         // create swim info
         con.query(`INSERT INTO swim (username, pace, wetsuit) VALUES("${username}", 0, "-")`)
 

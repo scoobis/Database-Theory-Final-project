@@ -40,6 +40,7 @@ con.connect(function (err) {
     createTable.createSwimTable(con)
     createTable.createEventTable(con)
     createTable.createUsersEvents(con)
+    createTable.createViewForMostPopularBikes(con)
   }
 })
 

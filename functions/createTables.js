@@ -2,13 +2,13 @@
 function createUserTable(con) {
     // Create user table
     con.query('CREATE TABLE IF NOT EXISTS user'+
-    '(first_name varchar(100) NOT NULL, '+
+    '(username varchar(100) NOT NULL, '+
+    'first_name varchar(100) NOT NULL, '+
     'last_name varchar(100) NOT NULL, '+
     'email varchar(155) NOT NULL, '+
-    'password varchar(155),'+
-    'weight int, '+
-    'height int, '+
-    'username varchar(100), '+
+    'password varchar(255) NOT NULL,'+
+    'weight int NOT NULL, '+
+    'height int NOT NULL, '+
     'PRIMARY KEY(username))')
 }
 
@@ -18,8 +18,8 @@ function creataBikeTable(con) {
     '(id int NOT NULL AUTO_INCREMENT, '+
     'brand varchar(100) NOT NULL, '+
     'model varchar(100) NOT NULL, '+
-    'price int NOT NULL, '+
     'manfyear int NOT NULL, '+
+    'price int NOT NULL, '+
     'PRIMARY KEY(id))')
 }
 
@@ -34,7 +34,7 @@ function createRunTable(con) {
     // Create run table
     con.query('CREATE TABLE IF NOT EXISTS run'+
     '(username varchar(100) NOT NULL, '+
-    'pace int, '+
+    'pace int NOT NULL, '+
     'racing_shoe varchar(100) NOT NULL, '+
     'training_shoe varchar(100) NOT NULL, '+
     'PRIMARY KEY(username))')
@@ -72,6 +72,17 @@ function createUsersEvents(con) {
     'runTime int NOT NULL)')
 }
 
+function createViewForMostPopularBikes(con) {
+    con.query(`CREATE OR REPLACE view mostpopularbikes
+    AS 
+    SELECT b.brand, b.model, b.manfyear
+    FROM bikes AS b
+    JOIN usersbikes as ub
+    ON b.id = ub.bike_id
+    GROUP BY b.model
+    ORDER BY COUNT(*) DESC LIMIT 10`)
+}
+
 exports.createUserTable = createUserTable
 exports.creataBikeTable = creataBikeTable
 exports.createUsersBikesTable = createUsersBikesTable
@@ -79,3 +90,4 @@ exports.createRunTable = createRunTable
 exports.createSwimTable = createSwimTable
 exports.createEventTable = createEventTable
 exports.createUsersEvents = createUsersEvents
+exports.createViewForMostPopularBikes = createViewForMostPopularBikes
