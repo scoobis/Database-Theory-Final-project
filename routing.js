@@ -85,6 +85,7 @@ function mainPage (req, res) {
         ON u.username = s.username
         JOIN run AS r
         ON r.username = u.username
+        GROUP BY u.username
         ORDER BY COUNT(*)`, (err3, accessories) => {
           if (err3) throw err3
 
@@ -93,7 +94,7 @@ function mainPage (req, res) {
         FROM event AS e
         INNER JOIN usersevents As us
         ON us.event_id = e.id
-        GROUP BY e.brand
+        GROUP BY e.brand, e.distance, e.location, e.date
         ORDER BY COUNT(*)`, (err4, mostPopularEvents) => {
           if (err4) throw err4
         
