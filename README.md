@@ -5,7 +5,9 @@
 Set up databse:  
 User: root  
 name of databse: 2dv513_final  
-Password: Gabbe123  
+Password: Gabbe123
+  
+If you want some data run the databse dump
   
 If you want other options you need to change the source code in app.js
 
