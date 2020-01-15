@@ -39,6 +39,7 @@ function mainPage (req, res) {
     con.query(`SELECT * FROM bikes`, (err2, allBikes) => {
       if (err2) throw err2
 
+      // users events
     con.query(`SELECT e.brand, e.location, e.distance, e.date, u.swimTime, u.T1, u.bikeTime, u.T2, u.runTime  FROM event AS e
     JOIN usersevents AS u
     ON e.id = u.event_id
@@ -94,7 +95,7 @@ function mainPage (req, res) {
         FROM event AS e
         INNER JOIN usersevents As us
         ON us.event_id = e.id
-        GROUP BY e.brand, e.distance, e.location, e.date
+        GROUP BY e.id
         ORDER BY COUNT(*)`, (err4, mostPopularEvents) => {
           if (err4) throw err4
         
