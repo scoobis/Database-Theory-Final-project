@@ -1,4 +1,4 @@
-# Course: Database Theory, final project
+# Course: Database Theory | final project
 
 ## Installation
   
