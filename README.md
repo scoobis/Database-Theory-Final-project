@@ -1,4 +1,4 @@
-# 2DV513_final
+# Course: Database Theory, final project
 
 ## Installation
   
